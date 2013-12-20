@@ -2,6 +2,8 @@ var db = require("../../db");
 var MD5 = require("MD5");
 var exec = require("child_process").exec;
 var config = require("../../config");
+var fs = require("fs");
+var path = require("path");
 
 module.exports = function(req,res){
 	var args = [];
@@ -10,17 +12,27 @@ module.exports = function(req,res){
 		args.push("--" + k + "=" + req.query[k]);
 	}
 
-	var pic = MD5(args.join("")) + ".png"
+	var pic = MD5(args.join("")) + ".png";
 
-	var command = ["casperjs","main.js"].concat(args).concat(["--pic=" + config.pathPrefix + pic]).join(" ");
+	var imagePath = path.resolve(config.pathPrefix, pic);
+	var command = ["casperjs","main.js"].concat(args).concat(["--pic=" + imagePath]).join(" ");
 
-	exec(command,function(err,stdout,stderr){
-		if(err){
-			return res.send(500,stdout.match(/:?\[\[ (.*) \]\]/)[1]);
-		}else{
+
+	fs.exists(imagePath,function(exists){
+		if(exists){
 			return res.send(200,config.urlPrefix + pic);
+		}else{
+			clip();
 		}
 	});
-	// exec();
-	// res.send(200,"ok");
+
+	function clip(){
+		exec(command,function(err,stdout,stderr){
+			if(err){
+				return res.send(500,stdout.match(/:?\[\[ (.*) \]\]/)[1]);
+			}else{
+				return res.send(200,config.urlPrefix + pic);
+			}
+		});
+	}
 };
