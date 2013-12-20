@@ -1,16 +1,13 @@
 {
-  "name": "Edward",
-  "version": "0.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "application-name",
+  "version": "0.0.1",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js"
   },
-  "repository": "",
-  "author": "",
-  "license": "BSD",
-  "readmeFilename": "README.md",
   "dependencies": {
-    "MD5": "~1.1.0"
+    "express": "3.4.4",
+    "jade": "*",
+    "mongoskin": "~0.6.1"
   }
 }
