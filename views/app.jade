@@ -4,7 +4,7 @@ block content
 	script(src="/javascripts/app.js")
 	#app(ng-controller="panelCtrl")
 		.row
-			.span8
+			.span5.settings
 				form.form-horizontal
 					.control-group
 						.control-label url
@@ -38,5 +38,5 @@ block content
 					.control-group
 						.controls
 							button.btn(type="submit",ng-click="clip()") Clip!
-			.span4(ng-show="image")
+			.span4(ng-show="image").img-tray
 				img(ng-src="{{image}}")	

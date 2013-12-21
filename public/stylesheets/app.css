@@ -1,3 +1,15 @@
 #app {
+  width: 900px;
   padding-top: 75px;
+  margin: 0 auto;
+}
+#app .settings {
+  margin-top: 20px;
+}
+#app .settings .input-small {
+  margin-right: 10px;
+}
+#app .img-tray {
+  height: 400px;
+  overflow: auto;
 }
