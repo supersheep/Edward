@@ -1,7 +1,13 @@
 doctype 5
-html
+html(ng-app="Edward")
   head
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap.css')
+    link(rel='stylesheet', href='/stylesheets/app.css')
+    script(src='/javascripts/angular.js')
+    script(src='/javascripts/ui-bootstrap-custom.js')
   body
+    .navbar.navbar-fixed-top.navbar-inverse: .navbar-inner: .container
+      a.brand(href="/").
+        Edward
     block content
