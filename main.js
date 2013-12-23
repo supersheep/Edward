@@ -4,7 +4,7 @@ var utils = require('utils');
 
 var url = casper.cli.options.url
     , pic = casper.cli.options.pic || null
-    , viewport = casper.cli.viewport
+    , viewport = casper.cli.options.viewport
     , offset = casper.cli.options.offset
     , size = casper.cli.options.size
     , desktop = casper.cli.options.desktop

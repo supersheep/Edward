@@ -11,32 +11,36 @@ block content
 						.controls
 							input(type="text", name="url", required, id="url", ng-model="url").form-control
 					.control-group
-						.control-label viewport
-						.controls.controls-row
-							input(type="number", ng-model="viewport.width").input-small
-							input(type="number", ng-model="viewport.height").input-small
-					.control-group
-						.control-label offset
-						.controls.controls-row
-							input(type="number", ng-model="offset.top").input-small
-							input(type="number", ng-model="offset.left").input-small
-					.control-group
-						.control-label size
-						.controls.controls-row
-							input(type="number", ng-model="size.width").input-small
-							input(type="number", ng-model="siz.eheight").input-small
-					.control-group
-						.control-label selector
-						.controls.controls-row
-							input(type="text", ng-model="selector").form-control
-					.control-group
 						.control-label ua
 						.controls.controls-row
 							.btn-group
 								button.btn.btn-primary(ng-model="ua" btn-radio="'desktop'") desktop
 								button.btn.btn-primary(ng-model='ua' btn-radio="'mobile'") mobile
+					.control-group(ng-hide="showadvanced")
+						.controls
+							button.btn.btn-small(ng-click="showadvanced=true") advanced
+					.control-group(ng-show="showadvanced")
+						.control-label viewport
+						.controls.controls-row
+							input(type="number", ng-model="viewport.width").input-small
+							input(type="number", ng-model="viewport.height").input-small
+					.control-group(ng-show="showadvanced")
+						.control-label offset
+						.controls.controls-row
+							input(type="number", ng-model="offset.top").input-small
+							input(type="number", ng-model="offset.left").input-small
+					.control-group(ng-show="showadvanced")
+						.control-label size
+						.controls.controls-row
+							input(type="number", ng-model="size.width").input-small
+							input(type="number", ng-model="siz.eheight").input-small
+					.control-group(ng-show="showadvanced")
+						.control-label selector
+						.controls.controls-row
+							input(type="text", ng-model="selector").form-control
 					.control-group
 						.controls
 							button.btn(type="submit",ng-click="clip()") Clip!
 			.span4(ng-show="image").img-tray
+				img(ng-show="loading",src="/images/loading.gif",class="loading")
 				img(ng-src="{{image}}")	

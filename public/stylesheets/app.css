@@ -10,6 +10,14 @@
   margin-right: 10px;
 }
 #app .img-tray {
+  text-align: center;
   height: 400px;
   overflow: auto;
+  position: relative;
+}
+#app .img-tray .loading {
+  display: block;
+  position: absolute;
+  top: 120px;
+  left: 150px;
 }
