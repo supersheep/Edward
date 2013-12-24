@@ -51,14 +51,17 @@ function clip(command,pic,callback){
 	timeout = setTimeout(function(){
 		callback("timeout");
 	},config.timeout);
-	if(commands[command]){
+
 		proxy.once(eventName,function(err,data){
 			clearTimeout(timeout);
 			console.log("proxy: %s %s", err, data)
 			callback(err,data);
 			delete commands[command];
 		});
-	}else{
+
+		if(commands[command]){
+			return;
+		}
 		commands[command] = true;
 		console.log("exec: %s", command);
 		exec(command,function(err,stdout,stderr){
@@ -78,7 +81,7 @@ function clip(command,pic,callback){
 			console.log("exec: err: %s, stdout: %s, stderr %s",err,stdout,stderr);
 			proxy.emit(eventName,errMsg,data);
 		});
-	}
+
 }
 
 
