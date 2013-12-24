@@ -54,14 +54,17 @@ function clip(command,pic,callback){
 	if(commands[command]){
 		proxy.once(eventName,function(err,data){
 			clearTimeout(timeout);
+			console.log("proxy: %s %s", err, data)
 			callback(err,data);
 			delete commands[command];
 		});
 	}else{
 		commands[command] = true;
+		console.log("exec: %s", command);
 		exec(command,function(err,stdout,stderr){
 			var errMsg = null;
 			var data = null;
+			console.log("exec: done",err,stdout,stderr);
 			if(err){
 				try{
 					errMsg = stdout.match(/:?\[\[ (.*) \]\]/)[1];
@@ -72,6 +75,7 @@ function clip(command,pic,callback){
 				errMsg = null;
 				data = config.urlPrefix + pic;
 			}
+			console.log("exec: err: %s, stdout: %s, stderr %s",err,stdout,stderr);
 			proxy.emit(eventName,errMsg,data);
 		});
 	}
@@ -88,6 +92,7 @@ module.exports = function(req,res){
 	// 	res.send(200,value);
 	// }else{
 		getPicByQuery(query,function(err,value){
+			console.log("getpic: %s %s",err,value);
 			if(err){
 				return res.send(500,err);
 			}else{

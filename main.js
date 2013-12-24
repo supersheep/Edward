@@ -11,7 +11,7 @@ var url = casper.cli.options.url
     , selector = casper.cli.options.selector;
 
 function paramToArray(param){
-    return param.split(",").map(function(s){return parseInt(s);});
+    return param.split(",").map(function(s){return parseInt(s,10);});
 }
 
 
@@ -48,6 +48,7 @@ if(viewport){
 casper.then(function(){
     var clipRect = null;
     if(selector){
+        console.log("capture with selector");
         this.captureSelector(pic,selector);
     }else if(offset && size){
         offset = paramToArray(offset);
@@ -58,8 +59,10 @@ casper.then(function(){
             width: size[0],
             height: size[1]
         };
+        console.log("capture with rect:",pic,clipRect);
         this.capture(pic,clipRect);
     }else{
+        console.log("capture:",pic);
         this.capture(pic);
     }
 });
