@@ -1,7 +1,5 @@
 var casper = require('casper').create();
 
-var utils = require('utils');
-
 var url = casper.cli.options.url
     , pic = casper.cli.options.pic || null
     , viewport = casper.cli.options.viewport
