@@ -1,4 +1,9 @@
-var casper = require('casper').create();
+var casper = require('casper').create({
+    onLoadError:function(){
+        casper.die("loadError.", 1);
+    }
+});
+
 
 var url = casper.cli.options.url
     , pic = casper.cli.options.pic || null
